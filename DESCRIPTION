@@ -1,0 +1,21 @@
+Package: eviatlas
+Version: 0.1.0
+Title: Workflows for evidence synthesis projects
+Authors@R: c(
+  person(
+    given = "Andrew",
+    family = "Feierman",
+    role = c("aut", "cre"),
+    email = "andrew.feierman@sei.org"),
+  person(
+    given = "Martin",
+    family = "Westgate",
+    role = c("aut"),
+    email = "martinjwestgate@gmail.com",
+    comment = c(ORCID = "0000-0003-0854-2034"))
+  )
+Description: Run a shiny app for visualising the datasets produced by systematic maps, or produce your own and push to shinyapps.io.
+Imports: dplyr, stringr, DT, ggplot2, leaflet, htmltools, htmlwidgets, mapview, leafem, sf, viridis, shiny, shinydashboard, shinyWidgets, shinyBS, RColorBrewer
+License: GPL-3
+BugReports: https://github.com/ESHackathon/eviatlas_package
+LazyData: true
