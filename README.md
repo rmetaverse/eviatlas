@@ -1,6 +1,6 @@
 # eviatlas
 
-eviatlas is an R package for visualising the datasets produced by systematic maps. It is the package version of the eviatlas app, which you can access at <a href="https://estech.shinyapps.io/eviatlas/">https://estech.shinyapps.io/eviatlas/</a>.
+eviatlas is an R package for visualising the datasets produced by systematic maps. It is the package version of the EviAtlas app, which you can access at <a href="https://estech.shinyapps.io/eviatlas/">https://estech.shinyapps.io/eviatlas/</a>.
 
 eviatlas was produced as part of the  <a href="https://www.eshackathon.org">Evidence Synthesis Hackathon</a> series. It was created by and for the open-source research community. Pull requests and suggestions for future improvements are welcome.
 
