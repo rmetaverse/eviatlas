@@ -7,7 +7,7 @@ eviatlas was produced as part of the  <a href="https://www.eshackathon.org">Evid
 You can download it using the following code:
 ``` r
 # install.packages("devtools")
-devtools::install_github("ESHackathon/eviatlas", ref = "pkg")
+devtools::install_github("mjwestgate/eviatlas")
 ```
 
 ## Usage
@@ -26,6 +26,8 @@ eviatlas(build = TRUE, app_name = "my_app")
 # build but not launch
 eviatlas(build = TRUE, launch = FALSE, app_name = "my_app")
 runApp("my_app") # launch the new app manually
+# install.packages("rsconnect") # to push to shinyapps.io
+# ?deployApp
 
 # run with no output of any kind
 eviatlas(build = FALSE, launch = FALSE) # returns a message, but no output
