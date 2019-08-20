@@ -7,12 +7,13 @@ eviatlas was produced as part of the  <a href="https://www.eshackathon.org">Evid
 You can download it using the following code:
 ``` r
 # install.packages("devtools")
-devtools::install_github("mjwestgate/eviatlas")
+devtools::install_github("ESHackathon/eviatlaspkg")
 ```
 
 ## Usage
 This package has only one function, called eviatlas. In default mode, it launches the eviatlas app in the browser, running locally on your machine:
 ``` r
+library(eviatlas)
 eviatlas()
 ```
 
