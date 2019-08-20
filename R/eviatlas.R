@@ -1,11 +1,15 @@
 #  function to run eviatlas locally
 eviatlas <- function(
-  # data, # optional dataset to display using eviatlas. Not yet implemented
+  data, # optional dataset to display using eviatlas
   build = FALSE, # logical: should the function build an app (TRUE),
   launch = TRUE, # logical: should the function launch an app in the browser (defaults to TRUE)
   app_name = "eviatlas_app", # path to file where app should be built. Ignored if build = FALSE
   max_file_size = 100
 ){
+
+  if(!missing(data)){
+    eviatlas_pilotdata <- data
+  }
 
   if(!build & !launch){
     message("eviatlas hasn't done anything, because build and launch are both FALSE")
@@ -34,11 +38,19 @@ eviatlas <- function(
         added_text = paste0("options(shiny.maxRequestSize = ", max_file_size, " * 1024^2)"),
         added_index = 3
       )
+
       # move dataset
-      invisible(file.copy(
-        from = system.file("data", "pilotdata.RData", package = "eviatlas"),
-        to = paste0(app_name, "/data")
-      ))
+      if(missing(data)){
+        invisible(file.copy(
+          from = system.file("data", "pilotdata.RData", package = "eviatlas"),
+          to = paste0(app_name, "/data")
+        ))
+      }else{
+        save(
+          eviatlas_pilotdata,
+          file = paste0("./", app_name, "/data/pilotdata.RData"))
+      }
+
       # move html files
       html_list <- c(
         system.file("htmlfiles", "AboutEvi.html", package = "eviatlas"),

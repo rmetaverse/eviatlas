@@ -1,11 +1,13 @@
 \name{eviatlas}
 \alias{eviatlas}
 \title{Run a shiny app for visualising systematic map databases}
-\description{Goes here}
+\description{eviatlas allows users to create a suite of visualisations from a database of studies, including Evidence Atlases (interactive geographical maps showing studies and their details over space), Heat Maps (cross tabulations of categorical variables that highlight clusters and gaps in the evidence), descriptive plots that help to visualise the evidence base (e.g. the number of publications per year), and human-readable databases that are easily filterable.}
 \usage{
-eviatlas(build = FALSE, launch = TRUE, app_name = "eviatlas_app", max_file_size = 100)
+eviatlas(data, build = FALSE, launch = TRUE,
+  app_name = "eviatlas_app", max_file_size = 100)
 }
 \arguments{
+  \item{data}{An optional data.frame to display using \code{eviatlas}}
   \item{build}{logical: Should the function build an app? Defaults to TRUE.}
   \item{launch}{logical: Should the function launch an app in the browser? Defaults to TRUE.}
   \item{app_name}{character giving the name of app to be build. Ignored if build = FALSE.}

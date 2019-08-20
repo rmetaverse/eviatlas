@@ -39,15 +39,8 @@ By default, eviatlas accepts file sizes up to 100 MB, but you can increase (or d
 eviatlas(max_file_size = 200)
 ```
 
-## Further development
-The eviatlas function is intended to take two further arguments:
-- 'data' will allow users to add their own data to the app from the command line.
-- 'allow_new_data' will allow users to disable the upload function, meaning that users could deploy eviatlas apps for a specific project.
-
-These features should be available soon.
-
-### Dependencies
-dplyr, stringr, DT, ggplot2, leaflet, htmltools, htmlwidgets, shiny, shinydashboard, shinyWidgets, viridis, mapview, leafem, RColorBrewer, shinyBS
+## Dependencies
+dplyr, DT, ggplot2, htmltools, htmlwidgets, leafem, leaflet, mapview, sf, shiny, shinyBS, shinydashboard, shinyWidgets, stringr, RColorBrewer, readr, viridis
 
 ## Citation
 If you use eviatlas in your work, please cite it as follows:

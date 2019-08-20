@@ -2,9 +2,10 @@
 library(eviatlas)
 # this appears to work if eviatlas is installed on your computer
 
-# load data + text
+# load data
 load("data/pilotdata.RData")
-# eviatlas_pilotdata <- readRDS("data/pilotdata.RDS")
+
+# load text in html files
 start_text <- readr::read_file("html/AboutEvi.html")
 about_sysmap_text <- readr::read_file("html/AboutSysMap.html")
 how_works_text <- readr::read_file("html/HowEviWorks.html")
