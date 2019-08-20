@@ -1,5 +1,5 @@
-\name{vegetated_strips_dataset}
-\alias{eviatlas_pilotdata}
+\name{eviatlas_pilotdata}
+\alias{vegetated_strips_dataset}
 \title{Vegetation Strips Systematic Map dataset}
 \description{Example systematic map database}
 \format{A data.frame containing 1072 observations of 15 variables:

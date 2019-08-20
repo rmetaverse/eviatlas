@@ -10,7 +10,7 @@ eviatlas(data, build = FALSE, launch = TRUE,
   \item{data}{An optional data.frame to display using \code{eviatlas}}
   \item{build}{logical: Should the function build an app? Defaults to TRUE.}
   \item{launch}{logical: Should the function launch an app in the browser? Defaults to TRUE.}
-  \item{app_name}{character giving the name of app to be build. Ignored if build = FALSE.}
+  \item{app_name}{character giving the name of app to be built. Ignored if build = FALSE.}
   \item{max_file_size}{Optional argument to set the maximum file size (in MB) that the app will accept.}
 }
 \value{
@@ -27,10 +27,8 @@ This function launches an app in the users' browser. Optionally can also build t
   \dontrun{eviatlas(build = TRUE, app_name = "my_app")}
 
   # build but not launch
-  \dontrun{
-    eviatlas(build = TRUE, launch = FALSE, app_name = "my_app")
-    runApp("my_app") # launch the new app manually
-  }
+  \dontrun{eviatlas(build = TRUE, launch = FALSE, app_name = "my_app")}
+  \dontrun{runApp("my_app")} # launch the new app manually
 
   # run with no output of any kind
   eviatlas(build = FALSE, launch = FALSE) # returns a message, but no output
