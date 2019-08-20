@@ -86,3 +86,4 @@ importFrom(shinyWidgets,
   materialSwitch,
   updateMaterialSwitch
 )
+importFrom(utils, write.table)

@@ -1,17 +1,4 @@
-#' Create bar plot with distribution of studies over the region from lat/long info
-#'
-#' Created For	  : ES Hackathon 2018
-#' @param df Input dataframe
-#' @param location_column Column with location information (preferably country-level or higher)
-#' @return Returns a bar plot object showing counts of literature in systematic review for each location
-#'
-#' @author Sanita Dhaubanjar
-#'
-#' @keywords SystematicReview
-#'
-#' @export
-
-GenLocationTrend = function(df, location_column, axis_txt_lim = 60){
+GenLocationTrend <- function(df, location_column, axis_txt_lim = 60){
 
   # if  df is a shapefile, remove geometry column
   if (any(class(df) == 'sf')) {df <- sf::st_drop_geometry(df)}
