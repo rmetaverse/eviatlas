@@ -1,4 +1,4 @@
-GenHeatMap <- function(idata, selcols, axis_txt_lim = 60){
+draw_heatmap <- function(idata, selcols, axis_txt_lim = 60){
 
   # if  df is a shapefile, remove geometry column
   if(any(class(idata) == 'sf')) {idata <- sf::st_drop_geometry(idata)}

@@ -1,8 +1,8 @@
-GenTimeTrend <- function(idata, hist_col, axis_txt_lim = 60){
-  UseMethod("GenTimeTrend", object = idata[hist_col][[1]])
+draw_time_plot <- function(idata, hist_col, axis_txt_lim = 60){
+  UseMethod("draw_time_plot", object = idata[hist_col][[1]])
 }
 
-GenTimeTrend.default <- function(idata, hist_col, axis_txt_lim = 60){
+draw_time_plot.default <- function(idata, hist_col, axis_txt_lim = 60){
 
   gttmp <- ggplot2::ggplot(idata, aes_string(x = hist_col)) +
     ggplot2::geom_bar(
@@ -28,7 +28,7 @@ GenTimeTrend.default <- function(idata, hist_col, axis_txt_lim = 60){
   gttmp
 }
 
-GenTimeTrend.numeric <- function(idata, hist_col, axis_txt_lim = 60){
+draw_time_plot.numeric <- function(idata, hist_col, axis_txt_lim = 60){
 
   ggplot2::ggplot(idata, aes_string(x = hist_col)) +
     ggplot2::geom_bar(

@@ -504,11 +504,11 @@ output$heatmap_selector <- renderUI({
 
 #geom_bar rather than geom_histogram so that non-continous variables can be plotted
 gen_time_trend_plot <- reactive({
-  GenTimeTrend(data_active(), input$select_timetrend_col)
+  draw_time_plot(data_active(), input$select_timetrend_col)
 })
 
 gen_location_trend_plot <- reactive({
-  GenLocationTrend(data_active(), input$select_loc_col)
+  draw_location_plot(data_active(), input$select_loc_col)
 })
 
 output$plot1 <- renderPlot({
@@ -544,7 +544,7 @@ output$save_plot_2 <- downloadHandler(
 )
 
 gen_heatmap <- reactive({
-  GenHeatMap(data_active(), c(input$heat_select_x, input$heat_select_y))
+  draw_heatmap(data_active(), c(input$heat_select_x, input$heat_select_y))
 })
 
 output$heatmap <- renderPlot({
