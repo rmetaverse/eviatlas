@@ -3,17 +3,19 @@ Version: 0.1.0
 Title: Visualisation and mapping for datasets from systematic reviews and maps
 Authors@R: c(
   person(
-    given = "Andrew",
-    family = "Feierman",
-    role = c("aut", "cre"),
-    email = "andrew.feierman@sei.org"),
-  person(
     given = "Martin",
     family = "Westgate",
-    role = c("aut"),
+    role = c("aut", "cre"),
     email = "martinjwestgate@gmail.com",
-    comment = c(ORCID = "0000-0003-0854-2034"))
+    comment = c(ORCID = "0000-0003-0854-2034")
+  ),
+  person(
+    given = "Andrew",
+    family = "Feierman",
+    role = c("aut"),
+    email = "andrew.feierman@sei.org"
   )
+)
 Description: Run a shiny app for visualising the datasets produced by systematic maps, or produce your own.
 Imports: dplyr, DT, ggplot2, htmltools, htmlwidgets, leafem, leaflet, mapview, sf, shiny, shinyBS, shinydashboard, shinyWidgets, stringr, RColorBrewer, readr, viridis
 License: GPL-3

@@ -6,8 +6,8 @@ eviatlas was produced as part of the  <a href="https://www.eshackathon.org">Evid
 
 You can download it using the following code:
 ``` r
-# install.packages("devtools")
-devtools::install_github("ESHackathon/eviatlaspkg")
+# install.packages("remotes")
+remotes::install_github("rmetaverse/eviatlas")
 ```
 
 ## Usage
