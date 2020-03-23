@@ -1,4 +1,5 @@
 ## ui.R ##
+library(shinydashboard)
 
 easyprint_js_file <- "https://rawgit.com/rowanwins/leaflet-easyPrint/gh-pages/dist/bundle.js"
 
@@ -16,7 +17,7 @@ sidebar <- shinydashboard::dashboardSidebar(
     menuItem("Heatmap", tabName = "heatmap",
              icon = icon("fire")),
     menuItem("View Code",
-             href = "https://github.com/ESHackathon/eviatlas",
+             href = "https://github.com/rmetaverse/eviatlas",
              icon = icon("github"))
   )
 )

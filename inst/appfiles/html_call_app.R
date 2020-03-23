@@ -3,7 +3,7 @@ library(eviatlas)
 # this appears to work if eviatlas is installed on your computer
 
 # load data
-eviatlas_pilotdata <- load("data/pilotdata.rds")
+eviatlas_pilotdata <- readRDS("data/pilotdata.rds") # only works from a built app
 
 # load text in html files
 start_text <- readr::read_file("html/AboutEvi.html")

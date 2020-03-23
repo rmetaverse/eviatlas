@@ -7,8 +7,8 @@ eviatlas <- function(
   max_file_size = 100
 ){
 
-  if(!missing(data)){
-    eviatlas_pilotdata <- data
+  if(missing(data)){
+    data <- eviatlas_pilotdata
   }
 
   if(!build & !launch){
@@ -40,16 +40,10 @@ eviatlas <- function(
       )
 
       # move dataset
-      if(missing(data)){
-        invisible(file.copy(
-          from = system.file("data", "pilotdata.RData", package = "eviatlas"),
-          to = paste0(app_name, "/data")
-        ))
-      }else{
-        save(
-          eviatlas_pilotdata,
-          file = paste0("./", app_name, "/data/pilotdata.RData"))
-      }
+      saveRDS(
+        data,
+        file = paste0("./", app_name, "/data/pilotdata.rds")
+      )
 
       # move html files
       html_list <- c(

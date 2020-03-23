@@ -14,7 +14,7 @@ Authors@R: c(
     role = c("aut"),
     email = "andrew.feierman@sei.org"))
 Description: Run a shiny app for visualising the datasets produced by systematic maps, or produce your own.
-Imports: dplyr, DT, ggplot2, htmltools, htmlwidgets, leafem, leaflet, mapview, sf, shiny, shinyBS, shinydashboard, shinyWidgets, stringr, RColorBrewer, readr, viridis
+Depends: R (>= 3.5.0), dplyr, DT, ggplot2, htmltools, htmlwidgets, leafem, leaflet, mapview, sf, shiny, shinyBS, shinydashboard, shinyWidgets, stringr, RColorBrewer, readr, viridis
 License: GPL-3
 BugReports: https://github.com/ESHackathon/eviatlas_package
 LazyData: true
