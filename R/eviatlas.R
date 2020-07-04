@@ -1,25 +1,23 @@
 #  function to run eviatlas locally
 eviatlas <- function(
-  data, # optional dataset to display using eviatlas
-  build = FALSE, # logical: should the function build an app (TRUE),
-  launch = TRUE, # logical: should the function launch an app in the browser (defaults to TRUE)
-  app_name = "eviatlas_app", # path to file where app should be built. Ignored if build = FALSE
-  max_file_size = 100
-){
-
-  if(missing(data)){
+                     data, # optional dataset to display using eviatlas
+                     build = FALSE, # logical: should the function build an app (TRUE),
+                     launch = TRUE, # logical: should the function launch an app in the browser (defaults to TRUE)
+                     app_name = "eviatlas_app", # path to file where app should be built. Ignored if build = FALSE
+                     max_file_size = 100) {
+  if (missing(data)) {
     data <- eviatlas_pilotdata
   }
 
-  if(!build & !launch){
+  if (!build & !launch) {
     message("eviatlas hasn't done anything, because build and launch are both FALSE")
-  }else{
+  } else {
 
     # build a new app if requested
-    if(build){
+    if (build) {
 
       # app_name <- "newapp" # FOR TESTING ONLY!!!
-      if(dir.exists(app_name)){
+      if (dir.exists(app_name)) {
         unlink(app_name, recursive = TRUE)
       }
       dir.create(app_name)
@@ -52,29 +50,28 @@ eviatlas <- function(
         system.file("htmlfiles", "HowCiteEvi.html", package = "eviatlas"),
         system.file("htmlfiles", "HowEviWorks.html", package = "eviatlas")
       )
-      lapply(html_list, function(a){
+      lapply(html_list, function(a) {
         invisible(file.copy(
           from = a,
           to = paste0(app_name, "/html/")
         ))
       })
 
-      if(launch){ # launch newly-built app
+      if (launch) { # launch newly-built app
         shiny::runApp(app_name)
       }
-
-    }else{ # i.e. if launching locally
+    } else { # i.e. if launching locally
 
       # ensure html files are available for display
       htmlfiles <- c("AboutEvi.html", "AboutSysMap.html", "HowCiteEvi.html", "HowEviWorks.html")
-      file_list <- lapply(htmlfiles, function(a){
+      file_list <- lapply(htmlfiles, function(a) {
         file_location <- system.file("htmlfiles", a, package = "eviatlas")
         return(readr::read_file(file_location))
       })
       names(file_list) <- c("start", "about_sysmap", "how_cite", "how_works")
 
       # set file size
-      if(!missing(max_file_size)){
+      if (!missing(max_file_size)) {
         initial_file_size <- options("shiny.maxRequestSize")
         options(shiny.maxRequestSize = max_file_size * 1024^2)
         on.exit(options(initial_file_size))
@@ -91,7 +88,6 @@ eviatlas <- function(
         system.file("appfiles", "run_app_locally.R", package = "eviatlas"),
         local = TRUE
       )
-
     } # end if(!build)
   }
 }
