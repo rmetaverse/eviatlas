@@ -1,9 +1,8 @@
-draw_time_plot <- function(idata, hist_col, axis_txt_lim = 60){
+draw_time_plot <- function(idata, hist_col, axis_txt_lim = 60) {
   UseMethod("draw_time_plot", object = idata[hist_col][[1]])
 }
 
-draw_time_plot.default <- function(idata, hist_col, axis_txt_lim = 60){
-
+draw_time_plot.default <- function(idata, hist_col, axis_txt_lim = 60) {
   gttmp <- ggplot2::ggplot(idata, aes_string(x = hist_col)) +
     ggplot2::geom_bar(
       alpha = 0.9,
@@ -21,15 +20,15 @@ draw_time_plot.default <- function(idata, hist_col, axis_txt_lim = 60){
     )
 
   # Rotate xaxis label if too many categories
-  if (dplyr::n_distinct(idata[hist_col]) > 15){
+  if (dplyr::n_distinct(idata[hist_col]) > 15) {
     gttmp <- gttmp + ggplot2::theme(
-      axis.text.x = element_text(angle = 40, hjust = 0.95, size = 12))
+      axis.text.x = element_text(angle = 40, hjust = 0.95, size = 12)
+    )
   }
   gttmp
 }
 
-draw_time_plot.numeric <- function(idata, hist_col, axis_txt_lim = 60){
-
+draw_time_plot.numeric <- function(idata, hist_col, axis_txt_lim = 60) {
   ggplot2::ggplot(idata, aes_string(x = hist_col)) +
     ggplot2::geom_bar(
       alpha = 0.9,

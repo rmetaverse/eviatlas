@@ -1,7 +1,9 @@
-draw_heatmap <- function(idata, selcols, axis_txt_lim = 60){
+draw_heatmap <- function(idata, selcols, axis_txt_lim = 60) {
 
   # if  df is a shapefile, remove geometry column
-  if(any(class(idata) == 'sf')) {idata <- sf::st_drop_geometry(idata)}
+  if (any(class(idata) == "sf")) {
+    idata <- sf::st_drop_geometry(idata)
+  }
 
   # Convert columns to factors to allow for categorical classification for both numeric and character data -------
   tmp <- as.data.frame(sapply(idata[selcols], function(x) as.factor(x)))
@@ -9,14 +11,15 @@ draw_heatmap <- function(idata, selcols, axis_txt_lim = 60){
   colnames(tmp) <- c("listone", "listtwo", "n")
 
   # Plot Heatmap
-    ggplot2::ggplot(tmp,
-      aes_string(
-        x = "listone",
-        y = "listtwo",
-        fill = "n",
-        label = "n"
-      )
-    ) +
+  ggplot2::ggplot(
+    tmp,
+    aes_string(
+      x = "listone",
+      y = "listtwo",
+      fill = "n",
+      label = "n"
+    )
+  ) +
     ggplot2::geom_tile(alpha = 0.3, color = "grey60") +
     ggplot2::geom_text() +
     viridis::scale_fill_viridis() +
@@ -41,4 +44,3 @@ draw_heatmap <- function(idata, selcols, axis_txt_lim = 60){
 
   # heatmap
 }
-
