@@ -11,36 +11,20 @@ remotes::install_github("rmetaverse/eviatlas")
 ```
 
 ## Usage
-This package has only one function, called eviatlas. In default mode, it launches the eviatlas app in the browser, running locally on your machine:
+This package has only one function, called <code>eviatlas</code>, which creates an app in the working directory:
 ``` r
 library(eviatlas)
 eviatlas()
 ```
 
-Alternatively, you can use eviatlas to build an app that you can launch yourself, or push to a server such as <a href="https://www.shinyapps.io">shinyapps.io</a>:
-``` r
-eviatlas(build = TRUE) # builds and launches by default
+If you want to run this app, you can do so using <code>shiny::runApp</code>; but note that neither <code>Shiny</code> nor any of the other dependencies of the app are installed by default with <code>eviatlas</code>.
 
-# change the app name from the default of "eviatlas_app"
-eviatlas(build = TRUE, app_name = "my_app")
+We intend that later versions of <code>eviatlas</code> will allow you to:
+- specify your own dataset from the command line
+- choose which data tabs you want to display
+- change the style of the dashboard
+- provide your own user-defined cover pages
 
-# build but not launch
-eviatlas(build = TRUE, launch = FALSE, app_name = "my_app")
-runApp("my_app") # launch the new app manually
-# install.packages("rsconnect") # to push to shinyapps.io
-# ?deployApp
-
-# run with no output of any kind
-eviatlas(build = FALSE, launch = FALSE) # returns a message, but no output
-```
-
-By default, eviatlas accepts file sizes up to 100 MB, but you can increase (or decrease) this using the 'max_file_size' argument:
-``` r
-eviatlas(max_file_size = 200)
-```
-
-## Dependencies
-dplyr, DT, ggplot2, htmltools, htmlwidgets, leafem, leaflet, mapview, sf, shiny, shinyBS, shinydashboard, shinyWidgets, stringr, RColorBrewer, readr, viridis
 
 ## Citation
 If you use eviatlas in your work, please cite it as follows:
