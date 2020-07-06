@@ -18,7 +18,7 @@ build_app_scripts <- function(files, path, added_text, added_index) {
   script_vector <- do.call(c, script_list)
   utils::write.table(
     script_vector,
-    paste0(path, "/app.R"),
+    paste0(app_name, "/app.R"),
     sep = "\n",
     quote = FALSE,
     row.names = FALSE,
