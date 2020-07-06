@@ -1,4 +1,3 @@
-# tabItem(tabName = "home",
 tabItem(
   tabName = "atlas",
   fluidRow(

@@ -12,39 +12,26 @@ build_ui_sidebar <- function(
   if(any(tabs_present)){
     tab_list <- lapply(which(tabs_present), function(a){
       info_tr <- as.list(tab_lookup[a, ])
-      return(
-        menuItem(info_tr$label, tabName = info_tr$tabName, icon = icon(info_tr$icon))
+      result <- paste0(
+        "menuItem('",
+        info_tr$label,
+        "', tabName = '",
+        info_tr$tabName,
+        "', icon = icon('",
+        info_tr$icon,
+        "'))"
       )
+      if(a != max(which(tabs_present))){
+        result <- paste0(result, ",")
+      }
+      return(result)
     })
   }else{
     stop("none of the specified tabs are available")
   }
-  # menuItem("About eviatlas",
-  #   tabName = "about",
-  #   icon = icon("question")
-  # ),
-  # menuItem("Evidence Atlas",
-  #   tabName = "atlas",
-  #   icon = icon("map")
-  # ),
-  # menuItem("Map Database",
-  #   tabName = "data",
-  #   icon = icon("database")
-  # ),
-  # menuItem("Descriptive Plots",
-  #   tabName = "insights",
-  #   icon = icon("home")
-  # ),
-  # menuItem("Heatmap",
-  #   tabName = "heatmap",
-  #   icon = icon("fire")
-  # )
 
-  sidebar <- shinydashboard::dashboardSidebar(
-    sidebarMenu(id = "main_sidebar",
-      tab_list
-    )
-  )
-
-  return(sidebar)
+  return(c("shinydashboard::dashboardSidebar(
+    sidebarMenu(id = 'main_sidebar',",
+    unlist(tab_list),
+    "))"))
 }

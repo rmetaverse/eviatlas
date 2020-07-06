@@ -9,34 +9,6 @@ importFrom(dplyr,
   quo,
   "%>%"
 )
-importFrom(DT, dataTableOutput)
-importFrom(ggplot2,
-  aes,
-  aes_string,
-  element_text,
-  element_line,
-  element_blank
-)
-importFrom(htmltools,
-  HTML,
-  strong,
-  h4,
-  h5,
-  div,
-  tag
-)
-importFrom(htmlwidgets,
-  onRender,
-  JS
-)
-importFrom(leaflet,
-  addTiles,
-  leaflet,
-  leafletProxy,
-  leafletOptions,
-  markerClusterOptions,
-  renderLeaflet
-)
 importFrom(shiny,
   actionButton,
   checkboxInput,
@@ -86,4 +58,3 @@ importFrom(shinyWidgets,
   materialSwitch,
   updateMaterialSwitch
 )
-importFrom(utils, write.table)
