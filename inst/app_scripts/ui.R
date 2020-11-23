@@ -2,6 +2,8 @@
 
 easyprint_js_file <- "https://rawgit.com/rowanwins/leaflet-easyPrint/gh-pages/dist/bundle.js"
 
+# ui <- fluidPage(
+#   navbarPage("eviatlas", theme = shinythemes::shinytheme("paper"),
 
 sidebar <- dashboardSidebar(
 
