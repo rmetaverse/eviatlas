@@ -1,3 +1,4 @@
 export(eviatlas,
   draw_barchart, draw_heatmap, draw_histogram, sys_map, sys_map_shapefile,
-  get_latitude_cols, get_longitude_cols, get_histogram_viable_columns, get_link_cols)
+  get_latitude_cols, get_longitude_cols, get_histogram_viable_columns, get_link_cols,
+  sidebar_inputs)
