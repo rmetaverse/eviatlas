@@ -10,14 +10,19 @@
 #'
 #' @param data An optional data.frame to display using \code{eviatlas}
 #' @param name character giving the name of app to be built
+#' @param title label to be shown in the app header
+#' @param data optional data.frame to replace the default dataset
 #' @return This function builds an app in the working directory.
 #' @examples
-#'   \dontrun{eviatlas()}
+#'   \dontrun{eviatlas(); shiny::runApp("eviatlas_app")}
 #'
 #' @export eviatlas
 
 eviatlas <- function(
   name = "eviatlas_app",
+  title = "eviatlas", # defaults to 'eviatlas'
+  # style = "shiny", # shiny or shinydashboard - not operational
+  # theme = "spacelab", - not operational
   data # defaults to pilotdata.RData
   # options # list of settings - not yet implemented
 ){
@@ -37,7 +42,7 @@ eviatlas <- function(
     unlink(name, recursive = TRUE)
   }
   dir.create(name)
-  dir.create(paste0(name, "/R"))
+  # dir.create(paste0(name, "/R"))
   dir.create(paste0(name, "/html"))
   dir.create(paste0(name, "/data"))
   saveRDS(data, file = paste0("./", name, "/data/pilotdata.rds"))
@@ -51,40 +56,23 @@ eviatlas <- function(
   invisible(lapply(html_list, function(a) {
     file.copy(from = a, to = paste0(name, "/html/"))}))
 
-  # move server.R and ui.R into place
+  # move server.R
   file.copy(
     from = system.file("app_scripts", "server.R", package = "eviatlas"),
     to = name)
-  file.copy(
-    from = system.file("app_scripts", "ui.R", package = "eviatlas"),
-    to = name)
 
-  # construct server.R script
-  # files <- c(
-  #   system.file("app_scripts", "ui_upgrade_test.R", package = "eviatlas"),
-  #   system.file("app_scripts", "server_upgrade_test.R", package = "eviatlas"))
-  # result <- do.call(c, lapply(files, function(a){readLines(a, warn = FALSE)}))
-  result <- readLines(
-    system.file("app_scripts", "server.R", package = "eviatlas"),
+  # build ui.R
+  # import
+  ui <- readLines(
+    system.file("app_scripts", "ui.R", package = "eviatlas"),
     warn = FALSE)
-
-  # search app.R script to work out which internal functions (draw_heatmap etc) are needed
-  # result <- c(
-  #   detect_internal_functions(result),
-  #   result,
-  #   "shinyApp(ui, server)")
-  # New method: add required .R files
-  add_internal_functions(result, name)
-
-  # search for package names (i.e. preceeding ::) and
-  # add required functions and libraries to the top of the file
-  # this order is enforced so that package calls within internal functions are included
-  result <- c(detect_packages(name), result)
-
-  # export to app.R
+  # save ui
   utils::write.table(
-    result,
-    paste0(name, "/server.R"),
+    gsub(
+      "paste_user_title_here",
+      paste0("'", title, "'"),
+      ui), # update app title
+    paste0(name, "/ui.R"),
     sep = "\n",
     quote = FALSE,
     row.names = FALSE,

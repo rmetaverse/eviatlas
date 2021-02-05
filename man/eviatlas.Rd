@@ -4,12 +4,14 @@
 \alias{eviatlas}
 \title{Run a shiny app for visualising systematic map databases}
 \usage{
-eviatlas(data, name = "eviatlas_app")
+eviatlas(name = "eviatlas_app", title = "eviatlas", data)
 }
 \arguments{
-\item{data}{An optional data.frame to display using \code{eviatlas}}
-
 \item{name}{character giving the name of app to be built}
+
+\item{title}{label to be shown in the app header}
+
+\item{data}{optional data.frame to replace the default dataset}
 }
 \value{
 This function builds an app in the working directory.
@@ -24,6 +26,6 @@ of publications per year), and human-readable databases that are easily
 filterable.
 }
 \examples{
-  \dontrun{eviatlas()}
+  \dontrun{eviatlas(); shiny::runApp("eviatlas_app")}
 
 }

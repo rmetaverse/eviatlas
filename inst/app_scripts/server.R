@@ -1,4 +1,5 @@
 ## server.R ##
+library(eviatlas)
 
 # load data + text
 eviatlas_pilotdata <- readRDS("data/pilotdata.rds")
@@ -693,11 +694,10 @@ server <- shinyServer(
 
       radiusby <- input$atlas_radius_select
 
-      lat_plotted <-
-        as.numeric(unlist(data_active() %>%
+      lat_plotted <- as.numeric(unlist(data_active() %>%
                             dplyr::select(input$map_lat_select)))
-      lng_plotted <-
-        as.numeric(unlist(data_active() %>%
+
+      lng_plotted <- as.numeric(unlist(data_active() %>%
                             dplyr::select(input$map_lng_select)))
 
       if (input$atlas_color_by_select != "") {
@@ -789,11 +789,9 @@ server <- shinyServer(
 
       radiusby <- input$atlas_radius_select
 
-      lat_plotted <-
-        as.numeric(unlist(data_active() %>%
+      lat_plotted <- as.numeric(unlist(data_active() %>%
                             dplyr::select(input$map_lat_select)))
-      lng_plotted <-
-        as.numeric(unlist(data_active() %>%
+      lng_plotted <- as.numeric(unlist(data_active() %>%
                             dplyr::select(input$map_lng_select)))
 
       if (input$atlas_color_by_select != "") {
@@ -832,7 +830,7 @@ server <- shinyServer(
             title = stringr::str_to_title(stringr::str_replace_all(color_user, "\\.", " ")),
             position = 'topright',
             pal = factpal,
-            values = data_active()[, color_user],
+            values = data_active()[, color_user], # should perhaps be colorby?
             layerId = "color_by_legend",
             group = "legend",
             na.label = "None",

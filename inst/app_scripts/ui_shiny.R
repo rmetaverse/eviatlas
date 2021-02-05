@@ -1,12 +1,20 @@
 ## ui.R ##
-library(shinydashboard)
+# NOTE: this code isn't current yet, but is intended to:
+  # 1. optionally update the default layout to a version based on shiny::navbarPage
+  # 2. allow custom theme specification via bslib
+  
 library(leaflet)
 library(shinyWidgets)
+library(bslib)
 
 easyprint_js_file <- "https://rawgit.com/rowanwins/leaflet-easyPrint/gh-pages/dist/bundle.js"
 
-# ui <- fluidPage(
-#   navbarPage("eviatlas", theme = shinythemes::shinytheme("paper"),
+ui <- fluidPage(
+  navbarPage(paste_user_title_here,
+  theme = bs_theme(paste_bslib_theme_here),
+  tabPanel()
+
+# shinydashboard code below
 
 header <- dashboardHeader(title = paste_user_title_here)
 
