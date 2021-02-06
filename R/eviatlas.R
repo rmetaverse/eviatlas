@@ -14,26 +14,33 @@
 #' @param data optional data.frame to replace the default dataset
 #' @return This function builds an app in the working directory.
 #' @examples
-#'   \dontrun{eviatlas(); shiny::runApp("eviatlas_app")}
+#'
+#' \dontrun{
+#' eviatlas()
+#' shiny::runApp("eviatlas_app")
+#' }
 #'
 #' @export eviatlas
 
 eviatlas <- function(
-  name = "eviatlas_app",
-  title = "eviatlas", # defaults to 'eviatlas'
-  # style = "shiny", # shiny or shinydashboard - not operational
-  # theme = "spacelab", - not operational
-  data # defaults to pilotdata.RData
-  # options # list of settings - not yet implemented
-){
+                     name = "eviatlas_app",
+                     title = "eviatlas", # defaults to 'eviatlas'
+                     # style = "shiny", # shiny or shinydashboard - not operational
+                     # theme = "spacelab", - not operational
+                     data # defaults to pilotdata.RData
+                     # options # list of settings - not yet implemented
+) {
   # set defaults, errors etc
   no_data <- missing(data)
-  if(no_data){data <- eviatlas_pilotdata}
+  if (no_data) {
+    data <- eviatlas_pilotdata
+  }
 
   options <- list(
     allow_uploads = !no_data,
     upload_max = 100,
-    tabs = c("about", "atlas", "data", "insightplots", "heatmap"))
+    tabs = c("about", "atlas", "data", "insightplots", "heatmap")
+  )
   # note: 'atlas' was formerly 'home'
   # note: this is ignored for now as we are still in testing
 
@@ -52,30 +59,35 @@ eviatlas <- function(
     system.file("html_files", "AboutEvi.html", package = "eviatlas"),
     system.file("html_files", "AboutSysMap.html", package = "eviatlas"),
     system.file("html_files", "HowCiteEvi.html", package = "eviatlas"),
-    system.file("html_files", "HowEviWorks.html", package = "eviatlas"))
+    system.file("html_files", "HowEviWorks.html", package = "eviatlas")
+  )
   invisible(lapply(html_list, function(a) {
-    file.copy(from = a, to = paste0(name, "/html/"))}))
+    file.copy(from = a, to = paste0(name, "/html/"))
+  }))
 
   # move server.R
   file.copy(
     from = system.file("app_scripts", "server.R", package = "eviatlas"),
-    to = name)
+    to = name
+  )
 
   # build ui.R
   # import
   ui <- readLines(
     system.file("app_scripts", "ui.R", package = "eviatlas"),
-    warn = FALSE)
+    warn = FALSE
+  )
   # save ui
   utils::write.table(
     gsub(
       "paste_user_title_here",
       paste0("'", title, "'"),
-      ui), # update app title
+      ui
+    ), # update app title
     paste0(name, "/ui.R"),
     sep = "\n",
     quote = FALSE,
     row.names = FALSE,
-    col.names = FALSE)
-
+    col.names = FALSE
+  )
 }

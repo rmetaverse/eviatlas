@@ -22,6 +22,3 @@
 #' https://doi.org/10.1186/s13750-018-0126-2
 #' @name eviatlas_pilotdata
 NULL
-
-
-
