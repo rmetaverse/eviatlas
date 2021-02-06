@@ -1,8 +1,8 @@
-# functions to determine if columns contain what appear to be latitude or longtude columns
+# functions to determine if columns contain latitude or longitude data
 
 get_latitude_cols <- function(df) {
   n_out <- colnames(df)[1]
-  # waiting for a more elegant interpretation, this is quick and dirty...
+  # quick and dirty...
   if ("Latitude" %in% colnames(df)) {
     n_out <- "Latitude"
   } else if ("latitude" %in% colnames(df)) {
@@ -19,7 +19,7 @@ get_latitude_cols <- function(df) {
 
 get_longitude_cols <- function(df) {
   n_out <- colnames(df)[1]
-  # waiting for a more elegant interpretation, this is quick and dirty...
+  # quick and dirty...
   if ("Latitude" %in% colnames(df)) {
     n_out <- "Longitude"
   } else if ("longitude" %in% colnames(df)) {
@@ -28,6 +28,8 @@ get_longitude_cols <- function(df) {
     n_out <- "long"
   } else if ("lng" %in% colnames(df)) {
     n_out <- "lng"
+  } else if ("lon" %in% colnames(df)) {
+    n_out <- "lon"
   } else if ("Plotted.long." %in% colnames(df)) {
     n_out <- "Plotted.long."
   } else if (length(agrep(pattern = "longitude", x = colnames(df)))) {
