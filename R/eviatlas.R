@@ -12,6 +12,7 @@
 #' @param name character giving the name of app to be built
 #' @param title label to be shown in the app header
 #' @param data optional data.frame to replace the default dataset
+#' @param launch logical - should the app be launched once built? Defaults to TRUE
 #' @return This function builds an app in the working directory.
 #' @examples
 #'
@@ -23,12 +24,13 @@
 #' @export eviatlas
 
 eviatlas <- function(
-                     name = "eviatlas_app",
-                     title = "eviatlas", # defaults to 'eviatlas'
-                     # style = "shiny", # shiny or shinydashboard - not operational
-                     # theme = "spacelab", - not operational
-                     data # defaults to pilotdata.RData
-                     # options # list of settings - not yet implemented
+   name = "eviatlas_app",
+   title = "eviatlas", # defaults to 'eviatlas'
+   # style = "shiny", # shiny or shinydashboard - not operational
+   # theme = "spacelab", - not operational
+   data, # defaults to pilotdata.RData
+   launch = TRUE
+   # options # list of settings - not yet implemented
 ) {
   # set defaults, errors etc
   no_data <- missing(data)
@@ -90,4 +92,7 @@ eviatlas <- function(
     row.names = FALSE,
     col.names = FALSE
   )
+
+  if(launch){shiny::runApp(name)}
+
 }
