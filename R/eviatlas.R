@@ -1,63 +1,98 @@
-#  function to run eviatlas locally
-eviatlas <- function(
-  data, # optional dataset to display using eviatlas
-  app_name = "eviatlas_app", # path to file where app should be built. Ignored if build = FALSE
-  # allow_uploads = TRUE, # allow the user to add data
-  launch = TRUE, # logical: should the function launch an app in the browser (defaults to TRUE)
-  max_file_size = 100,
-  # sections that exist in build_ functions, but are yet to be passed from the user
-  layout # list containing entries named "tabs" and "title"
-){
+#' Run a shiny app for visualising systematic map databases
+#'
+#' eviatlas allows users to create a suite of visualisations from a database of
+#' studies, including Evidence Atlases (interactive geographical maps showing
+#' studies and their details over space), Heat Maps (cross tabulations of
+#' categorical variables that highlight clusters and gaps in the evidence),
+#' descriptive plots that help to visualise the evidence base (e.g. the number
+#' of publications per year), and human-readable databases that are easily
+#' filterable.
+#'
+#' @param data An optional data.frame to display using \code{eviatlas}
+#' @param name character giving the name of app to be built
+#' @param title label to be shown in the app header
+#' @param data optional data.frame to replace the default dataset
+#' @param launch logical - should the app be launched once built? Defaults to TRUE
+#' @return This function builds an app in the working directory.
+#' @examples
+#'
+#' \dontrun{
+#' eviatlas()
+#' shiny::runApp("eviatlas_app")
+#' }
+#'
+#' @export eviatlas
 
-  if(missing(data)){
+eviatlas <- function(
+   name = "eviatlas_app",
+   title = "eviatlas", # defaults to 'eviatlas'
+   # style = "shiny", # shiny or shinydashboard - not operational
+   # theme = "spacelab", - not operational
+   data, # defaults to pilotdata.RData
+   launch = TRUE
+   # options # list of settings - not yet implemented
+) {
+  # set defaults, errors etc
+  no_data <- missing(data)
+  if (no_data) {
     data <- eviatlas_pilotdata
   }
-  if(missing(layout)){
-    layout <- list(
-      tabs = c("about", "atlas", "data", "insights", "heatmap"),
-      title = "eviatlas")
+
+  options <- list(
+    allow_uploads = !no_data,
+    upload_max = 100,
+    tabs = c("about", "atlas", "data", "insightplots", "heatmap")
+  )
+  # note: 'atlas' was formerly 'home'
+  # note: this is ignored for now as we are still in testing
+
+  # build app structure
+  if (dir.exists(name)) {
+    unlink(name, recursive = TRUE)
   }
+  dir.create(name)
+  # dir.create(paste0(name, "/R"))
+  dir.create(paste0(name, "/html"))
+  dir.create(paste0(name, "/data"))
+  saveRDS(data, file = paste0("./", name, "/data/pilotdata.rds"))
 
-  if (dir.exists(app_name)) {
-    unlink(app_name, recursive = TRUE)
-  }
-  dir.create(app_name)
-  dir.create(paste0(app_name, "/data"))
-  # copy html and data files from the app into the relevant directories
-  # build a new script containing server and ui called app.R
-  # see https://shiny.rstudio.com/articles/app-formats.html
-
-  # ui
-  ui_text <- build_ui(title = layout$title, tabs = layout$tabs)
-
-  # server and extra stuff
-  file_list <- c(
-    system.file("appfiles", "html_call_app.R", package = "eviatlas"),
-    system.file("appfiles", "eviatlas_server.R", package = "eviatlas"),
-    system.file("appfiles", "html_call_app_end.R", package = "eviatlas"))
-  build_app_scripts(ui = ui_text, server_files = file_list, app_name = app_name)
-
-  # grepl for required libraries
-
-  # add to top of library
-
-  # move dataset
-  saveRDS(
-    data,
-    file = paste0("./", app_name, "/data/pilotdata.rds"))
-
-  # if 'about' tab is requested, move required html files
-  dir.create(paste0(app_name, "/html"))
+  # move required html files for 'about' tab
   html_list <- c(
-    system.file("htmlfiles", "AboutEvi.html", package = "eviatlas"),
-    system.file("htmlfiles", "AboutSysMap.html", package = "eviatlas"),
-    system.file("htmlfiles", "HowCiteEvi.html", package = "eviatlas"),
-    system.file("htmlfiles", "HowEviWorks.html", package = "eviatlas")
+    system.file("html_files", "AboutEvi.html", package = "eviatlas"),
+    system.file("html_files", "AboutSysMap.html", package = "eviatlas"),
+    system.file("html_files", "HowCiteEvi.html", package = "eviatlas"),
+    system.file("html_files", "HowEviWorks.html", package = "eviatlas")
   )
   invisible(lapply(html_list, function(a) {
-    file.copy(from = a, to = paste0(app_name, "/html/"))}))
+    file.copy(from = a, to = paste0(name, "/html/"))
+  }))
 
-  if (launch) { # launch newly-built app (optional)
-    shiny::runApp(app_name)
-  }
+  # move server.R
+  file.copy(
+    from = system.file("app_scripts", "server.R", package = "eviatlas"),
+    to = name
+  )
+
+  # build ui.R
+  # import
+  ui <- readLines(
+    system.file("app_scripts", "ui.R", package = "eviatlas"),
+    warn = FALSE
+  )
+  # save ui
+  utils::write.table(
+    gsub(
+      "paste_user_title_here",
+      paste0("'", title, "'"),
+      ui
+    ), # update app title
+    paste0(name, "/ui.R"),
+    sep = "\n",
+    quote = FALSE,
+    row.names = FALSE,
+    col.names = FALSE
+  )
+
+  if(launch){shiny::runApp(name)}
+
 }
